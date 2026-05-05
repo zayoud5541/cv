@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayoub Zayoud — Portfolio</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root{
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --color-text-primary: #e0e0e0;
+  --color-background-primary: #0a0a0a;
+  --color-background-secondary: #111;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:var(--color-background-primary)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:#0a0a0a;position:sticky;top:0;z-index:100;border-bottom:0.5px solid #222}
+.nav-logo{font-size:18px;font-weight:500;color:#fff;letter-spacing:1px}
+.nav-logo span{color:#e8a020}
+
+.hero{background:#0a0a0a;display:grid;grid-template-columns:1fr 380px;min-height:88vh;align-items:center;gap:0;overflow:hidden}
+.hero-left{padding:60px 48px;display:flex;flex-direction:column;justify-content:center}
+.hero h1{font-size:52px;font-weight:500;color:#fff;line-height:1.08;margin-bottom:12px}
+.hero h1 span{color:#e8a020}
+.hero-role{font-size:16px;color:#666;margin-bottom:32px;line-height:1.6;max-width:440px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:#e8a020;color:#0a0a0a;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer}
+.btn-outline{background:transparent;color:#fff;border:0.5px solid #444;padding:12px 24px;border-radius:8px;font-size:14px;cursor:pointer}
+.btn-outline:hover{border-color:#e8a020;color:#e8a020}
+.hero-stats{display:flex;gap:36px;margin-top:48px;padding-top:36px;border-top:0.5px solid #1e1e1e}
+.stat-val{font-size:26px;font-weight:500;color:#fff}
+.stat-label{font-size:11px;color:#555;margin-top:2px;letter-spacing:.5px}
+
+.hero-right{background:#0a0a0a;position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;min-height:88vh}
+.photo-frame{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05)}
+
+.sec-label{font-size:11px;color:#e8a020;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;font-weight:500}
+.sec-title{font-size:32px;font-weight:500;color:#fff;margin-bottom:40px;line-height:1.2}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.skill-card{background:#141414;border:0.5px solid #222;border-radius:12px;padding:20px}
+.skill-card-title{font-size:12px;font-weight:500;color:#e8a020;letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.skill-card-title i{font-size:16px}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+.skill-tag{font-size:11px;background:#1e1e1e;color:#bbb;border:0.5px solid #2a2a2a;padding:4px 10px;border-radius:20px}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.proj-card{background:#141414;border:0.5px solid #222;border-radius:12px;padding:24px;position:relative;overflow:hidden}
+.proj-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#e8a020}
+.proj-number{font-size:11px;color:#444;letter-spacing:1px;margin-bottom:12px;font-weight:500}
+.proj-title{font-size:16px;font-weight:500;color:#fff;margin-bottom:10px}
+.proj-desc{font-size:12.5px;color:#777;line-height:1.65;margin-bottom:16px}
+.proj-tags{display:flex;gap:6px;flex-wrap:wrap}
+.proj-tag{font-size:10px;background:#1e1e1e;color:#e8a020;border:0.5px solid #2d2502;padding:3px 9px;border-radius:20px}
+
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:grid;grid-template-columns:120px 1px 1fr;gap:0 24px;padding-bottom:32px}
+.tl-item:last-child{padding-bottom:0}
+.tl-date{font-size:11px;color:#666;padding-top:3px;text-align:right}
+.tl-line{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:10px;height:10px;background:#e8a020;border-radius:50%;flex-shrink:0;margin-top:3px}
+.tl-bar{flex:1;width:0.5px;background:#222;margin-top:6px}
+.tl-item:last-child .tl-bar{display:none}
+.tl-title{font-size:14px;font-weight:500;color:#fff;margin-bottom:3px}
+.tl-sub{font-size:12px;color:#888;margin-bottom:8px}
+.tl-desc{font-size:12px;color:#666;line-height:1.6}
+
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.cert-card{background:#141414;border:0.5px solid #222;border-radius:10px;padding:18px;display:flex;align-items:flex-start;gap:14px}
+.cert-icon{width:36px;height:36px;border-radius:8px;background:#1e1800;border:0.5px solid #3d3000;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cert-icon i{font-size:18px;color:#e8a020}
+.cert-name{font-size:13px;font-weight:500;color:#ddd;line-height:1.4}
+.cert-issuer{font-size:11px;color:#555;margin-top:3px}
+
+.contact-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:16px}
+.contact-item{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#141414;border:0.5px solid #222;border-radius:10px}
+.contact-item i{font-size:20px;color:#e8a020}
+.contact-label{font-size:11px;color:#555}
+.contact-val{font-size:13px;color:#ddd;margin-top:1px}
+
+.snav-btn{background:transparent;border:0.5px solid #222;color:#666;font-size:12px;padding:6px 16px;border-radius:20px;cursor:pointer;transition:all .2s}
+.snav-btn.active{background:#e8a020;border-color:#e8a020;color:#0a0a0a}
+.snav-btn:hover:not(.active){border-color:#555;color:#bbb}
+
+.lang-row{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.lang-name{font-size:13px;color:#bbb;width:80px}
+.lang-track{flex:1;height:4px;background:#1e1e1e;border-radius:4px;overflow:hidden}
+.lang-fill{height:100%;background:#e8a020;border-radius:4px}
+.lang-pct{font-size:11px;color:#555;width:36px;text-align:right}
+
+footer{background:#060606;padding:24px 48px;border-top:0.5px solid #111;display:flex;justify-content:space-between;align-items:center}
+.footer-text{font-size:12px;color:#444}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:12px;color:#555;text-decoration:none;cursor:pointer}
+.footer-links a:hover{color:#e8a020}
+
+[data-section]{display:none}
+[data-section].active{display:block}
+</style>
+</head>
+<body>
+
+<h2 class="sr-only">Ayoub Zayoud — Personal portfolio website</h2>
+
+<nav>
+  <div class="nav-logo">Ayoub<span>.</span></div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <h1>Ayoub<br><span>Zayoud</span></h1>
+    <p class="hero-role">Communications &amp; Networks Engineering Student<br>Passionate about Télécoms · Signal Processing · 5G/6G · Cybersecurity</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="show('projects')">View Projects</button>
+      <button class="btn-outline" onclick="show('contact')">Get in Touch</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-val">5+</div><div class="stat-label">Projects</div></div>
+      <div><div class="stat-val">4</div><div class="stat-label">Certifications</div></div>
+      <div><div class="stat-val">3</div><div class="stat-label">Clubs & IEEE</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="photo-frame" src="file_00000000971871f8a6c06c4133b37717.png" alt="Ayoub Zayoud" />
+  </div>
+</div>
+
+<div id="sections" style="background:#0a0a0a;padding:0 48px 48px">
+  <div style="display:flex;gap:8px;padding-top:48px;flex-wrap:wrap">
+    <button class="snav-btn active" onclick="show('about')">About</button>
+    <button class="snav-btn" onclick="show('skills')">Skills</button>
+    <button class="snav-btn" onclick="show('projects')">Projects</button>
+    <button class="snav-btn" onclick="show('education')">Education</button>
+    <button class="snav-btn" onclick="show('contact')">Contact</button>
+  </div>
+
+  <!-- ABOUT -->
+  <div data-section="about" class="active" style="padding-top:40px">
+    <div class="sec-label">Who I am</div>
+    <div class="sec-title">About me</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+      <div>
+        <p style="font-size:14px;color:#888;line-height:1.8;margin-bottom:20px">I'm a first-year Communications and Networks Engineering student at the École Nationale d'Ingénieurs de Gabès (ENIG), passionate about telecommunications, signal processing, cybersecurity, and the future of 5G/6G networks.</p>
+        <p style="font-size:14px;color:#888;line-height:1.8;margin-bottom:20px">My academic journey has involved hands-on MATLAB simulation of ISAC systems, LAN network design in Cisco Packet Tracer, image processing, and full-stack web development. I believe in building things that work — not just theory.</p>
+        <p style="font-size:14px;color:#888;line-height:1.8">I'm actively pursuing opportunities to grow through programs like AWS re/Start, internships, and collaborative research in emerging technologies.</p>
+      </div>
+      <div>
+        <div style="margin-bottom:20px">
+          <div class="sec-label" style="margin-bottom:16px">Languages</div>
+          <div class="lang-row"><span class="lang-name">Arabic</span><div class="lang-track"><div class="lang-fill" style="width:100%"></div></div><span class="lang-pct">Native</span></div>
+          <div class="lang-row"><span class="lang-name">French</span><div class="lang-track"><div class="lang-fill" style="width:78%"></div></div><span class="lang-pct">Good</span></div>
+          <div class="lang-row"><span class="lang-name">English</span><div class="lang-track"><div class="lang-fill" style="width:72%"></div></div><span class="lang-pct">Good</span></div>
+        </div>
+        <div>
+          <div class="sec-label" style="margin-bottom:12px">Interests</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="skill-tag">Télécommunications</span>
+            <span class="skill-tag">Cybersecurity</span>
+            <span class="skill-tag">CTF Challenges</span>
+            <span class="skill-tag">Signal Processing</span>
+            <span class="skill-tag">5G / 6G</span>
+            <span class="skill-tag">Cloud Computing</span>
+            <span class="skill-tag">AI / Deep Learning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div data-section="skills" style="padding-top:40px">
+    <div class="sec-label">What I know</div>
+    <div class="sec-title">Technical skills</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title"><i class="ti ti-antenna"></i>Télécoms & Networks</div>
+        <div class="skill-tags"><span class="skill-tag">IP Addressing</span><span class="skill-tag">Routing</span><span class="skill-tag">LAN Design</span><span class="skill-tag">Cisco Packet Tracer</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><i class="ti ti-wave-sine"></i>Signal Processing</div>
+        <div class="skill-tags"><span class="skill-tag">MATLAB</span><span class="skill-tag">Simulink</span><span class="skill-tag">SNR Analysis</span><span class="skill-tag">Radar Simulation</span><span class="skill-tag">Image Filtering</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><i class="ti ti-code"></i>Programming</div>
+        <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">C</span><span class="skill-tag">JavaScript</span><span class="skill-tag">PHP</span><span class="skill-tag">Java</span><span class="skill-tag">SQL</span><span class="skill-tag">JDBC</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><i class="ti ti-world"></i>Web & Databases</div>
+        <div class="skill-tags"><span class="skill-tag">HTML / CSS</span><span class="skill-tag">MySQL</span><span class="skill-tag">MySQL Workbench</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><i class="ti ti-terminal"></i>Systems & Tools</div>
+        <div class="skill-tags"><span class="skill-tag">Linux (Ubuntu)</span><span class="skill-tag">Git / GitHub</span><span class="skill-tag">VS Code</span></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title"><i class="ti ti-shield"></i>Security & Cloud</div>
+        <div class="skill-tags"><span class="skill-tag">Cloud Fundamentals</span><span class="skill-tag">Encryption Basics</span><span class="skill-tag">Security Fundamentals</span></div>
+      </div>
+    </div>
+    <div style="margin-top:40px">
+      <div class="sec-label" style="margin-bottom:20px">Certifications</div>
+      <div class="cert-grid">
+        <div class="cert-card"><div class="cert-icon"><i class="ti ti-shield-check"></i></div><div><div class="cert-name">Google Cybersecurity Certificate</div><div class="cert-issuer">Google</div></div></div>
+        <div class="cert-card"><div class="cert-icon"><i class="ti ti-chart-bar"></i></div><div><div class="cert-name">Google Data Analytics Certificate</div><div class="cert-issuer">Google</div></div></div>
+        <div class="cert-card"><div class="cert-icon"><i class="ti ti-cpu"></i></div><div><div class="cert-name">Fundamentals of Deep Learning</div><div class="cert-issuer">NVIDIA</div></div></div>
+        <div class="cert-card"><div class="cert-icon"><i class="ti ti-brand-python"></i></div><div><div class="cert-name">Introduction to Python</div><div class="cert-issuer">DataCamp</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div data-section="projects" style="padding-top:40px">
+    <div class="sec-label">What I've built</div>
+    <div class="sec-title">Projects</div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-number">01 · ACADEMIC</div>
+        <div class="proj-title">ISAC for Localisation</div>
+        <div class="proj-desc">Simulated a monostatic pulsed-radar ISAC system in MATLAB. Estimated target range via Time-of-Flight (d = c·Δt/2). Analysed detection performance across attenuation, noise, and distance scenarios (5 m–40 m). Produced a 16-page formal report.</div>
+        <div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">Radar</span><span class="proj-tag">6G</span><span class="proj-tag">Signal Processing</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-number">02 · WEB</div>
+        <div class="proj-title">Chaya3ni M3ak — Carpooling Platform</div>
+        <div class="proj-desc">Full-stack carpooling web app connecting drivers and passengers. Built user registration, ride posting, and matching features. PHP backend with MySQL; HTML/CSS/JS frontend.</div>
+        <div class="proj-tags"><span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span><span class="proj-tag">JavaScript</span><span class="proj-tag">HTML/CSS</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-number">03 · NETWORKING</div>
+        <div class="proj-title">LAN Design & IP Routing</div>
+        <div class="proj-desc">Designed a complete LAN topology with IP addressing, configured static and dynamic routing protocols (RIP/OSPF), and verified end-to-end connectivity.</div>
+        <div class="proj-tags"><span class="proj-tag">Cisco Packet Tracer</span><span class="proj-tag">IP Routing</span><span class="proj-tag">LAN</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-number">04 · SIGNAL</div>
+        <div class="proj-title">SNR & Noise Channel Modelling</div>
+        <div class="proj-desc">Generated and analysed signals in MATLAB. Modelled noisy communication channels and studied SNR degradation across different noise levels and channel conditions.</div>
+        <div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">SNR</span><span class="proj-tag">Channel Modelling</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-number">05 · IMAGE</div>
+        <div class="proj-title">Digital Image Processing</div>
+        <div class="proj-desc">Applied low-pass, high-pass, and median filters to digital images. Performed contrast enhancement and frequency-domain analysis using Fourier transforms.</div>
+        <div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">Filters</span><span class="proj-tag">Image Processing</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div data-section="education" style="padding-top:40px">
+    <div class="sec-label">Academic background</div>
+    <div class="sec-title">Education & activities</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">2025 – Present</div>
+        <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Engineering Degree — Communications & Networks (GCR)</div>
+          <div class="tl-sub">École Nationale d'Ingénieurs de Gabès (ENIG) · First Year</div>
+          <div class="tl-desc">Diplôme National d'Ingénieur — equivalent to a Master's degree. Core subjects: signal processing, telecommunications, network engineering, embedded systems, applied mathematics.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025 – Present</div>
+        <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">IEEE Member</div>
+          <div class="tl-sub">Institute of Electrical and Electronics Engineers</div>
+          <div class="tl-desc">Participated in presidential sessions on AI fundamentals and cybersecurity at IEEE chapters.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025 – Present</div>
+        <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Universe Club — Member</div>
+          <div class="tl-sub">ENIG · Communications, Networks & IT</div>
+          <div class="tl-desc">Attended technical workshops and talks on telecom and IT innovations.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025 – Present</div>
+        <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">SecuriNets Club — Member</div>
+          <div class="tl-sub">ENIG · Cybersecurity</div>
+          <div class="tl-desc">Engaged with encryption, cryptography, and CTF (Capture The Flag) challenge sessions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div data-section="contact" style="padding-top:40px">
+    <div class="sec-label">Let's connect</div>
+    <div class="sec-title">Contact</div>
+    <div class="contact-row">
+      <div class="contact-info">
+        <div class="contact-item"><i class="ti ti-mail"></i><div><div class="contact-label">Academic email</div><div class="contact-val">zayoud.ayoub@enig.u-gabes.tn</div></div></div>
+        <div class="contact-item"><i class="ti ti-mail"></i><div><div class="contact-label">Personal email</div><div class="contact-val">zayoud.ayoub.5541@gmail.com</div></div></div>
+        <div class="contact-item"><i class="ti ti-phone"></i><div><div class="contact-label">Phone</div><div class="contact-val">+216 92 908 800</div></div></div>
+        <div class="contact-item"><i class="ti ti-map-pin"></i><div><div class="contact-label">Location</div><div class="contact-val">El Kef, Tunisia</div></div></div>
+        <div class="contact-item"><i class="ti ti-brand-linkedin"></i><div><div class="contact-label">LinkedIn</div><div class="contact-val">linkedin.com/in/zayoud-ayoub-334a573a0</div></div></div>
+      </div>
+      <div>
+        <div style="background:#141414;border:0.5px solid #222;border-radius:10px;padding:20px">
+          <div style="font-size:12px;color:#555;margin-bottom:12px">Looking for</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="skill-tag">Internships</span>
+            <span class="skill-tag">AWS re/Start Program</span>
+            <span class="skill-tag">Research Collaboration</span>
+            <span class="skill-tag">Cloud Operations</span>
+            <span class="skill-tag">Telecom Engineering</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-text">© 2026 Ayoub Zayoud · El Kef, Tunisia</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/zayoud-ayoub-334a573a0/">LinkedIn</a>
+    <a onclick="show('contact')">Contact</a>
+  </div>
+</footer>
+
+<script>
+function show(id){
+  document.querySelectorAll('[data-section]').forEach(el=>el.classList.remove('active'));
+  var t=document.querySelector('[data-section="'+id+'"]');
+  if(t)t.classList.add('active');
+  document.querySelectorAll('.snav-btn').forEach(function(b){
+    b.classList.toggle('active',b.textContent.toLowerCase()===id||(id==='about'&&b.textContent==='About'));
+  });
+}
+</script>
+</body>
+</html>
