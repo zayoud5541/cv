@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ayoub Zayoud — Portfolio</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
@@ -16,25 +16,35 @@
 body{font-family:var(--font-sans);color:var(--color-text-primary);background:var(--color-background-primary)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:#0a0a0a;position:sticky;top:0;z-index:100;border-bottom:0.5px solid #222}
-.nav-logo{font-size:18px;font-weight:500;color:#fff;letter-spacing:1px}
-.nav-logo span{color:#e8a020}
+/* Navigation: no logo, no border line at the top (removed border-bottom completely) */
+nav{display:flex;justify-content:flex-end;align-items:center;padding:18px 40px;background:#0a0a0a;position:sticky;top:0;z-index:100;border-bottom: none;}
 
-.hero{background:#0a0a0a;display:grid;grid-template-columns:1fr 380px;min-height:88vh;align-items:center;gap:0;overflow:hidden}
-.hero-left{padding:60px 48px;display:flex;flex-direction:column;justify-content:center}
+.hero{
+  background:#0a0a0a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:88vh;
+  width:100%;
+}
+.hero-left{
+  padding:60px 48px;
+  max-width:800px;
+  width:100%;
+  margin:0 auto;
+  text-align:left;
+}
 .hero h1{font-size:52px;font-weight:500;color:#fff;line-height:1.08;margin-bottom:12px}
 .hero h1 span{color:#e8a020}
-.hero-role{font-size:16px;color:#666;margin-bottom:32px;line-height:1.6;max-width:440px}
+.hero-role{font-size:16px;color:#666;margin-bottom:32px;line-height:1.6;max-width:540px}
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{background:#e8a020;color:#0a0a0a;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer}
-.btn-outline{background:transparent;color:#fff;border:0.5px solid #444;padding:12px 24px;border-radius:8px;font-size:14px;cursor:pointer}
+.btn-primary{background:#e8a020;color:#0a0a0a;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:background 0.2s}
+.btn-primary:hover{background:#c48818}
+.btn-outline{background:transparent;color:#fff;border:0.5px solid #444;padding:12px 24px;border-radius:8px;font-size:14px;cursor:pointer;transition:all 0.2s}
 .btn-outline:hover{border-color:#e8a020;color:#e8a020}
 .hero-stats{display:flex;gap:36px;margin-top:48px;padding-top:36px;border-top:0.5px solid #1e1e1e}
 .stat-val{font-size:26px;font-weight:500;color:#fff}
 .stat-label{font-size:11px;color:#555;margin-top:2px;letter-spacing:.5px}
-
-.hero-right{background:#0a0a0a;position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;min-height:88vh}
-.photo-frame{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:contrast(1.05)}
 
 .sec-label{font-size:11px;color:#e8a020;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;font-weight:500}
 .sec-title{font-size:32px;font-weight:500;color:#fff;margin-bottom:40px;line-height:1.2}
@@ -99,15 +109,37 @@ footer{background:#060606;padding:24px 48px;border-top:0.5px solid #111;display:
 
 [data-section]{display:none}
 [data-section].active{display:block}
+
+/* Responsive adjustments for no-photo layout */
+@media (max-width: 768px) {
+  .hero{min-height:auto;}
+  .hero-left{padding:40px 24px;text-align:center;}
+  .hero-role{margin-left:auto;margin-right:auto;}
+  .hero-ctas{justify-content:center;}
+  .hero-stats{justify-content:center;}
+  .sec-title{font-size:28px;margin-bottom:28px;}
+  #sections{padding:0 24px 48px;}
+  nav{padding:16px 24px;}
+  .contact-row{grid-template-columns:1fr;gap:28px;}
+  .tl-item{grid-template-columns:90px 1px 1fr;gap:0 16px}
+  .tl-date{font-size:10px;}
+}
+
+@media (max-width: 480px) {
+  .hero h1{font-size:36px;}
+  .hero-role{font-size:14px;}
+  .btn-primary, .btn-outline{padding:10px 18px;font-size:13px;}
+  .skills-grid{grid-template-columns:1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .cert-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 
 <h2 class="sr-only">Ayoub Zayoud — Personal portfolio website</h2>
 
-<nav>
-  <div class="nav-logo">Ayoub<span>.</span></div>
-</nav>
+<nav></nav>
 
 <div class="hero">
   <div class="hero-left">
@@ -122,9 +154,6 @@ footer{background:#060606;padding:24px 48px;border-top:0.5px solid #111;display:
       <div><div class="stat-val">4</div><div class="stat-label">Certifications</div></div>
       <div><div class="stat-val">3</div><div class="stat-label">Clubs & IEEE</div></div>
     </div>
-  </div>
-  <div class="hero-right">
-    <img class="photo-frame" src="file_00000000971871f8a6c06c4133b37717.png" alt="Ayoub Zayoud" />
   </div>
 </div>
 
@@ -335,7 +364,10 @@ function show(id){
   var t=document.querySelector('[data-section="'+id+'"]');
   if(t)t.classList.add('active');
   document.querySelectorAll('.snav-btn').forEach(function(b){
-    b.classList.toggle('active',b.textContent.toLowerCase()===id||(id==='about'&&b.textContent==='About'));
+    var btnText = b.textContent.toLowerCase().trim();
+    var matches = (btnText === id) || (id === 'about' && btnText === 'about') || (id === 'skills' && btnText === 'skills') || (id === 'projects' && btnText === 'projects') || (id === 'education' && btnText === 'education') || (id === 'contact' && btnText === 'contact');
+    if(matches) b.classList.add('active');
+    else b.classList.remove('active');
   });
 }
 </script>
