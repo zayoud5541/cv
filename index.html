@@ -7,131 +7,204 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
 :root{
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --color-text-primary: #e0e0e0;
-  --color-background-primary: #0a0a0a;
-  --color-background-secondary: #111;
+  --orange:#e8a020;
+  --orange-dark:#c48818;
+  --bg:#0a0a0a;
+  --bg2:#141414;
+  --border:#222;
+  --text:#e0e0e0;
+  --muted:#666;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--font-sans);color:var(--color-text-primary);background:var(--color-background-primary)}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;color:var(--text);background:var(--bg);overflow-x:hidden}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 
-/* Navigation: no logo, no border line at the top (removed border-bottom completely) */
-nav{display:flex;justify-content:flex-end;align-items:center;padding:18px 40px;background:#0a0a0a;position:sticky;top:0;z-index:100;border-bottom: none;}
+/* NAV */
+nav{
+  display:flex;justify-content:center;align-items:center;gap:8px;
+  padding:14px 40px;
+  background:rgba(10,10,10,0.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  position:sticky;top:0;z-index:100;
+  border-bottom:0.5px solid #161616;
+}
+.nav-btn{
+  background:transparent;color:var(--muted);
+  border:0.5px solid #333;padding:8px 20px;
+  border-radius:8px;font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .25s;
+}
+.nav-btn:hover{border-color:#555;color:#ccc;background:#111}
+.nav-btn.active{background:var(--orange);border-color:var(--orange);color:#0a0a0a;font-weight:600}
 
+/* HERO */
 .hero{
-  background:#0a0a0a;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:88vh;
-  width:100%;
+  display:flex;align-items:center;justify-content:center;
+  min-height:90vh;width:100%;position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);
+  animation:gridPulse 8s ease-in-out infinite;
+}
+@keyframes gridPulse{0%,100%{opacity:.4}50%{opacity:.9}}
+.hero-glow{
+  position:absolute;width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,160,32,.08) 0%,transparent 70%);
+  right:-80px;top:50%;transform:translateY(-50%);pointer-events:none;
 }
 .hero-left{
-  padding:60px 48px;
-  max-width:800px;
-  width:100%;
-  margin:0 auto;
-  text-align:left;
+  padding:60px 48px;max-width:820px;width:100%;
+  margin:0 auto;text-align:left;position:relative;z-index:1;
 }
-.hero h1{font-size:52px;font-weight:500;color:#fff;line-height:1.08;margin-bottom:12px}
-.hero h1 span{color:#e8a020}
-.hero-role{font-size:16px;color:#666;margin-bottom:32px;line-height:1.6;max-width:540px}
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
-.btn-primary{background:#e8a020;color:#0a0a0a;border:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:background 0.2s}
-.btn-primary:hover{background:#c48818}
-.btn-outline{background:transparent;color:#fff;border:0.5px solid #444;padding:12px 24px;border-radius:8px;font-size:14px;cursor:pointer;transition:all 0.2s}
-.btn-outline:hover{border-color:#e8a020;color:#e8a020}
-.hero-stats{display:flex;gap:36px;margin-top:48px;padding-top:36px;border-top:0.5px solid #1e1e1e}
-.stat-val{font-size:26px;font-weight:500;color:#fff}
-.stat-label{font-size:11px;color:#555;margin-top:2px;letter-spacing:.5px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#111;border:0.5px solid #2a2a2a;
+  padding:6px 14px;border-radius:20px;
+  font-size:11px;color:#777;letter-spacing:.5px;margin-bottom:28px;
+}
+.badge-dot{width:6px;height:6px;background:var(--orange);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-.sec-label{font-size:11px;color:#e8a020;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;font-weight:500}
-.sec-title{font-size:32px;font-weight:500;color:#fff;margin-bottom:40px;line-height:1.2}
+.hero h1{font-size:58px;font-weight:600;color:#fff;line-height:1.05;margin-bottom:16px}
+.hero h1 span{color:var(--orange)}
+.hero-role{font-size:16px;color:#555;margin-bottom:36px;line-height:1.7;max-width:520px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
 
+.btn-primary{
+  background:var(--orange);color:#0a0a0a;border:none;
+  padding:13px 26px;border-radius:8px;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all .25s;
+}
+.btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,160,32,.3)}
+.btn-outline{
+  background:transparent;color:#fff;border:0.5px solid #444;
+  padding:13px 26px;border-radius:8px;font-size:14px;cursor:pointer;transition:all .25s;
+}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-2px)}
+
+.hero-stats{display:flex;gap:40px;padding-top:36px;border-top:0.5px solid #1e1e1e}
+.stat-val{font-size:28px;font-weight:600;color:#fff}
+.stat-label{font-size:11px;color:#444;margin-top:3px;letter-spacing:.5px;text-transform:uppercase}
+
+/* SECTIONS */
+#sections{background:var(--bg);padding:0 48px 80px}
+.section-block{padding-top:80px;padding-bottom:10px}
+.section-block+.section-block{border-top:0.5px solid #181818;margin-top:20px}
+
+.sec-label{font-size:11px;color:var(--orange);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:10px;font-weight:500}
+.sec-title{font-size:34px;font-weight:600;color:#fff;margin-bottom:44px;line-height:1.2}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.about-text p{font-size:14px;color:#888;line-height:1.9;margin-bottom:18px}
+
+.lang-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.lang-name{font-size:13px;color:#bbb;width:80px}
+.lang-track{flex:1;height:4px;background:#1e1e1e;border-radius:4px;overflow:hidden}
+.lang-fill{height:100%;background:var(--orange);border-radius:4px;width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
+.lang-pct{font-size:11px;color:#555;width:40px;text-align:right}
+
+.interest-tag{
+  font-size:11px;background:#1a1a1a;color:#aaa;
+  border:0.5px solid #2a2a2a;padding:5px 12px;border-radius:20px;
+  transition:all .2s;cursor:default;
+}
+.interest-tag:hover{border-color:var(--orange);color:var(--orange)}
+
+/* SKILLS */
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
-.skill-card{background:#141414;border:0.5px solid #222;border-radius:12px;padding:20px}
-.skill-card-title{font-size:12px;font-weight:500;color:#e8a020;letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.skill-card{
+  background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:20px;
+  transition:all .25s;
+}
+.skill-card:hover{border-color:#383838;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.skill-card-title{font-size:12px;font-weight:600;color:var(--orange);letter-spacing:.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .skill-card-title i{font-size:16px}
 .skill-tags{display:flex;flex-wrap:wrap;gap:6px}
 .skill-tag{font-size:11px;background:#1e1e1e;color:#bbb;border:0.5px solid #2a2a2a;padding:4px 10px;border-radius:20px}
 
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.proj-card{background:#141414;border:0.5px solid #222;border-radius:12px;padding:24px;position:relative;overflow:hidden}
-.proj-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#e8a020}
-.proj-number{font-size:11px;color:#444;letter-spacing:1px;margin-bottom:12px;font-weight:500}
-.proj-title{font-size:16px;font-weight:500;color:#fff;margin-bottom:10px}
-.proj-desc{font-size:12.5px;color:#777;line-height:1.65;margin-bottom:16px}
-.proj-tags{display:flex;gap:6px;flex-wrap:wrap}
-.proj-tag{font-size:10px;background:#1e1e1e;color:#e8a020;border:0.5px solid #2d2502;padding:3px 9px;border-radius:20px}
-
-.timeline{display:flex;flex-direction:column;gap:0}
-.tl-item{display:grid;grid-template-columns:120px 1px 1fr;gap:0 24px;padding-bottom:32px}
-.tl-item:last-child{padding-bottom:0}
-.tl-date{font-size:11px;color:#666;padding-top:3px;text-align:right}
-.tl-line{display:flex;flex-direction:column;align-items:center}
-.tl-dot{width:10px;height:10px;background:#e8a020;border-radius:50%;flex-shrink:0;margin-top:3px}
-.tl-bar{flex:1;width:0.5px;background:#222;margin-top:6px}
-.tl-item:last-child .tl-bar{display:none}
-.tl-title{font-size:14px;font-weight:500;color:#fff;margin-bottom:3px}
-.tl-sub{font-size:12px;color:#888;margin-bottom:8px}
-.tl-desc{font-size:12px;color:#666;line-height:1.6}
-
 .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-.cert-card{background:#141414;border:0.5px solid #222;border-radius:10px;padding:18px;display:flex;align-items:flex-start;gap:14px}
+.cert-card{
+  background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;
+  padding:18px;display:flex;align-items:flex-start;gap:14px;transition:all .25s;
+}
+.cert-card:hover{border-color:#383838;transform:translateY(-2px)}
 .cert-icon{width:36px;height:36px;border-radius:8px;background:#1e1800;border:0.5px solid #3d3000;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cert-icon i{font-size:18px;color:#e8a020}
+.cert-icon i{font-size:18px;color:var(--orange)}
 .cert-name{font-size:13px;font-weight:500;color:#ddd;line-height:1.4}
 .cert-issuer{font-size:11px;color:#555;margin-top:3px}
 
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.proj-card{
+  background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;
+  padding:24px;position:relative;overflow:hidden;transition:all .3s;
+}
+.proj-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--orange)}
+.proj-card:hover{border-color:#383838;transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.5)}
+.proj-number{font-size:11px;color:#3a3a3a;letter-spacing:1px;margin-bottom:12px;font-weight:500}
+.proj-title{font-size:16px;font-weight:500;color:#fff;margin-bottom:10px}
+.proj-desc{font-size:12.5px;color:#666;line-height:1.7;margin-bottom:16px}
+.proj-tags{display:flex;gap:6px;flex-wrap:wrap}
+.proj-tag{font-size:10px;background:#1e1e1e;color:var(--orange);border:0.5px solid #2d2502;padding:3px 9px;border-radius:20px}
+
+/* EDUCATION */
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:grid;grid-template-columns:120px 1px 1fr;gap:0 24px;padding-bottom:36px}
+.tl-item:last-child{padding-bottom:0}
+.tl-date{font-size:11px;color:#555;padding-top:3px;text-align:right}
+.tl-line{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:10px;height:10px;background:var(--orange);border-radius:50%;flex-shrink:0;margin-top:3px;box-shadow:0 0 0 3px rgba(232,160,32,.15)}
+.tl-bar{flex:1;width:0.5px;background:#1e1e1e;margin-top:6px}
+.tl-item:last-child .tl-bar{display:none}
+.tl-title{font-size:14px;font-weight:500;color:#fff;margin-bottom:4px}
+.tl-sub{font-size:12px;color:#777;margin-bottom:8px}
+.tl-desc{font-size:12px;color:#555;line-height:1.7}
+
+/* CONTACT */
 .contact-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.contact-info{display:flex;flex-direction:column;gap:16px}
-.contact-item{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#141414;border:0.5px solid #222;border-radius:10px}
-.contact-item i{font-size:20px;color:#e8a020}
+.contact-info{display:flex;flex-direction:column;gap:12px}
+.contact-item{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;transition:all .2s}
+.contact-item:hover{border-color:#383838}
+.contact-item i{font-size:20px;color:var(--orange)}
 .contact-label{font-size:11px;color:#555}
 .contact-val{font-size:13px;color:#ddd;margin-top:1px}
 
-.snav-btn{background:transparent;border:0.5px solid #222;color:#666;font-size:12px;padding:6px 16px;border-radius:20px;cursor:pointer;transition:all .2s}
-.snav-btn.active{background:#e8a020;border-color:#e8a020;color:#0a0a0a}
-.snav-btn:hover:not(.active){border-color:#555;color:#bbb}
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-.lang-row{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.lang-name{font-size:13px;color:#bbb;width:80px}
-.lang-track{flex:1;height:4px;background:#1e1e1e;border-radius:4px;overflow:hidden}
-.lang-fill{height:100%;background:#e8a020;border-radius:4px}
-.lang-pct{font-size:11px;color:#555;width:36px;text-align:right}
-
+/* FOOTER */
 footer{background:#060606;padding:24px 48px;border-top:0.5px solid #111;display:flex;justify-content:space-between;align-items:center}
-.footer-text{font-size:12px;color:#444}
+.footer-text{font-size:12px;color:#333}
 .footer-links{display:flex;gap:20px}
-.footer-links a{font-size:12px;color:#555;text-decoration:none;cursor:pointer}
-.footer-links a:hover{color:#e8a020}
+.footer-links a{font-size:12px;color:#444;text-decoration:none;cursor:pointer;transition:color .2s}
+.footer-links a:hover{color:var(--orange)}
 
-[data-section]{display:none}
-[data-section].active{display:block}
-
-/* Responsive adjustments for no-photo layout */
-@media (max-width: 768px) {
-  .hero{min-height:auto;}
-  .hero-left{padding:40px 24px;text-align:center;}
-  .hero-role{margin-left:auto;margin-right:auto;}
-  .hero-ctas{justify-content:center;}
-  .hero-stats{justify-content:center;}
-  .sec-title{font-size:28px;margin-bottom:28px;}
-  #sections{padding:0 24px 48px;}
-  nav{padding:16px 24px;}
-  .contact-row{grid-template-columns:1fr;gap:28px;}
-  .tl-item{grid-template-columns:90px 1px 1fr;gap:0 16px}
-  .tl-date{font-size:10px;}
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{gap:6px;padding:12px 16px;flex-wrap:wrap}
+  .nav-btn{padding:7px 14px;font-size:12px}
+  .hero{min-height:auto}
+  .hero-left{padding:48px 24px;text-align:center}
+  .hero-role,.hero-ctas{margin-left:auto;margin-right:auto}
+  .hero-ctas{justify-content:center}
+  .hero-stats{justify-content:center;gap:28px}
+  .hero h1{font-size:40px}
+  #sections{padding:0 24px 60px}
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .contact-row{grid-template-columns:1fr;gap:24px}
+  .tl-item{grid-template-columns:80px 1px 1fr;gap:0 14px}
 }
-
-@media (max-width: 480px) {
-  .hero h1{font-size:36px;}
-  .hero-role{font-size:14px;}
-  .btn-primary, .btn-outline{padding:10px 18px;font-size:13px;}
-  .skills-grid{grid-template-columns:1fr;}
-  .projects-grid{grid-template-columns:1fr;}
-  .cert-grid{grid-template-columns:1fr;}
+@media(max-width:480px){
+  .hero h1{font-size:32px}
+  .skills-grid,.projects-grid,.cert-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -139,60 +212,60 @@ footer{background:#060606;padding:24px 48px;border-top:0.5px solid #111;display:
 
 <h2 class="sr-only">Ayoub Zayoud — Personal portfolio website</h2>
 
-<nav></nav>
+<!-- NAV -->
+<nav>
+  <button class="nav-btn" onclick="navClick('section-about')">About</button>
+  <button class="nav-btn" onclick="navClick('section-skills')">Skills</button>
+  <button class="nav-btn" onclick="navClick('section-projects')">Projects</button>
+  <button class="nav-btn" onclick="navClick('section-education')">Education</button>
+  <button class="nav-btn" onclick="navClick('section-contact')">Contact</button>
+</nav>
 
+<!-- HERO -->
 <div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
   <div class="hero-left">
+    <div class="hero-badge"><span class="badge-dot"></span>Open to Internships &amp; Opportunities</div>
     <h1>Ayoub<br><span>Zayoud</span></h1>
-    <p class="hero-role">Communications &amp; Networks Engineering Student<br>Passionate about Télécoms · Signal Processing · 5G/6G · Cybersecurity</p>
-    <div class="hero-ctas">
-      <button class="btn-primary" onclick="show('projects')">View Projects</button>
-      <button class="btn-outline" onclick="show('contact')">Get in Touch</button>
-    </div>
+    <p class="hero-role">Communications &amp; Networks Engineering Student<br>Passionate about Telecoms · Signal Processing · 5G/6G · Cybersecurity</p>
     <div class="hero-stats">
       <div><div class="stat-val">5+</div><div class="stat-label">Projects</div></div>
       <div><div class="stat-val">4</div><div class="stat-label">Certifications</div></div>
-      <div><div class="stat-val">3</div><div class="stat-label">Clubs & IEEE</div></div>
+      <div><div class="stat-val">3</div><div class="stat-label">Clubs &amp; IEEE</div></div>
     </div>
   </div>
 </div>
 
-<div id="sections" style="background:#0a0a0a;padding:0 48px 48px">
-  <div style="display:flex;gap:8px;padding-top:48px;flex-wrap:wrap">
-    <button class="snav-btn active" onclick="show('about')">About</button>
-    <button class="snav-btn" onclick="show('skills')">Skills</button>
-    <button class="snav-btn" onclick="show('projects')">Projects</button>
-    <button class="snav-btn" onclick="show('education')">Education</button>
-    <button class="snav-btn" onclick="show('contact')">Contact</button>
-  </div>
+<!-- SECTIONS -->
+<div id="sections">
 
   <!-- ABOUT -->
-  <div data-section="about" class="active" style="padding-top:40px">
+  <div id="section-about" class="section-block reveal">
     <div class="sec-label">Who I am</div>
     <div class="sec-title">About me</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
-      <div>
-        <p style="font-size:14px;color:#888;line-height:1.8;margin-bottom:20px">I'm a first-year Communications and Networks Engineering student at the École Nationale d'Ingénieurs de Gabès (ENIG), passionate about telecommunications, signal processing, cybersecurity, and the future of 5G/6G networks.</p>
-        <p style="font-size:14px;color:#888;line-height:1.8;margin-bottom:20px">My academic journey has involved hands-on MATLAB simulation of ISAC systems, LAN network design in Cisco Packet Tracer, image processing, and full-stack web development. I believe in building things that work — not just theory.</p>
-        <p style="font-size:14px;color:#888;line-height:1.8">I'm actively pursuing opportunities to grow through programs like AWS re/Start, internships, and collaborative research in emerging technologies.</p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a first-year Communications and Networks Engineering student at the École Nationale d'Ingénieurs de Gabès (ENIG), passionate about telecommunications, signal processing, cybersecurity, and the future of 5G/6G networks.</p>
+        <p>My academic journey has involved hands-on MATLAB simulation of ISAC systems, LAN network design in Cisco Packet Tracer, image processing, and full-stack web development. I believe in building things that work — not just theory.</p>
+        <p>I'm actively pursuing opportunities to grow through programs like AWS re/Start, internships, and collaborative research in emerging technologies.</p>
       </div>
       <div>
-        <div style="margin-bottom:20px">
-          <div class="sec-label" style="margin-bottom:16px">Languages</div>
-          <div class="lang-row"><span class="lang-name">Arabic</span><div class="lang-track"><div class="lang-fill" style="width:100%"></div></div><span class="lang-pct">Native</span></div>
-          <div class="lang-row"><span class="lang-name">French</span><div class="lang-track"><div class="lang-fill" style="width:78%"></div></div><span class="lang-pct">Good</span></div>
-          <div class="lang-row"><span class="lang-name">English</span><div class="lang-track"><div class="lang-fill" style="width:72%"></div></div><span class="lang-pct">Good</span></div>
+        <div style="margin-bottom:28px">
+          <div class="sec-label" style="margin-bottom:18px">Languages</div>
+          <div class="lang-row"><span class="lang-name">Arabic</span><div class="lang-track"><div class="lang-fill" data-width="100%"></div></div><span class="lang-pct">Native</span></div>
+          <div class="lang-row"><span class="lang-name">English</span><div class="lang-track"><div class="lang-fill" data-width="78%"></div></div><span class="lang-pct">Good</span></div>
+          <div class="lang-row"><span class="lang-name">French</span><div class="lang-track"><div class="lang-fill" data-width="72%"></div></div><span class="lang-pct">Good</span></div>
         </div>
         <div>
-          <div class="sec-label" style="margin-bottom:12px">Interests</div>
+          <div class="sec-label" style="margin-bottom:14px">Interests</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px">
-            <span class="skill-tag">Télécommunications</span>
-            <span class="skill-tag">Cybersecurity</span>
-            <span class="skill-tag">CTF Challenges</span>
-            <span class="skill-tag">Signal Processing</span>
-            <span class="skill-tag">5G / 6G</span>
-            <span class="skill-tag">Cloud Computing</span>
-            <span class="skill-tag">AI / Deep Learning</span>
+            <span class="interest-tag">Telecommunications</span>
+            <span class="interest-tag">Cybersecurity</span>
+            <span class="interest-tag">Signal Processing</span>
+            <span class="interest-tag">5G / 6G</span>
+            <span class="interest-tag">Cloud Computing</span>
+            <span class="interest-tag">AI / Deep Learning</span>
           </div>
         </div>
       </div>
@@ -200,36 +273,18 @@ footer{background:#060606;padding:24px 48px;border-top:0.5px solid #111;display:
   </div>
 
   <!-- SKILLS -->
-  <div data-section="skills" style="padding-top:40px">
+  <div id="section-skills" class="section-block reveal">
     <div class="sec-label">What I know</div>
     <div class="sec-title">Technical skills</div>
     <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-card-title"><i class="ti ti-antenna"></i>Télécoms & Networks</div>
-        <div class="skill-tags"><span class="skill-tag">IP Addressing</span><span class="skill-tag">Routing</span><span class="skill-tag">LAN Design</span><span class="skill-tag">Cisco Packet Tracer</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-title"><i class="ti ti-wave-sine"></i>Signal Processing</div>
-        <div class="skill-tags"><span class="skill-tag">MATLAB</span><span class="skill-tag">Simulink</span><span class="skill-tag">SNR Analysis</span><span class="skill-tag">Radar Simulation</span><span class="skill-tag">Image Filtering</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-title"><i class="ti ti-code"></i>Programming</div>
-        <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">C</span><span class="skill-tag">JavaScript</span><span class="skill-tag">PHP</span><span class="skill-tag">Java</span><span class="skill-tag">SQL</span><span class="skill-tag">JDBC</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-title"><i class="ti ti-world"></i>Web & Databases</div>
-        <div class="skill-tags"><span class="skill-tag">HTML / CSS</span><span class="skill-tag">MySQL</span><span class="skill-tag">MySQL Workbench</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-title"><i class="ti ti-terminal"></i>Systems & Tools</div>
-        <div class="skill-tags"><span class="skill-tag">Linux (Ubuntu)</span><span class="skill-tag">Git / GitHub</span><span class="skill-tag">VS Code</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-title"><i class="ti ti-shield"></i>Security & Cloud</div>
-        <div class="skill-tags"><span class="skill-tag">Cloud Fundamentals</span><span class="skill-tag">Encryption Basics</span><span class="skill-tag">Security Fundamentals</span></div>
-      </div>
+      <div class="skill-card"><div class="skill-card-title"><i class="ti ti-antenna"></i>Telecoms &amp; Networks</div><div class="skill-tags"><span class="skill-tag">IP Addressing</span><span class="skill-tag">Routing</span><span class="skill-tag">LAN Design</span><span class="skill-tag">Cisco Packet Tracer</span></div></div>
+      <div class="skill-card"><div class="skill-card-title"><i class="ti ti-wave-sine"></i>Signal Processing</div><div class="skill-tags"><span class="skill-tag">MATLAB</span><span class="skill-tag">Simulink</span><span class="skill-tag">SNR Analysis</span><span class="skill-tag">Radar Simulation</span><span class="skill-tag">Image Filtering</span></div></div>
+      <div class="skill-card"><div class="skill-card-title"><i class="ti ti-code"></i>Programming</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">C</span><span class="skill-tag">JavaScript</span><span class="skill-tag">PHP</span><span class="skill-tag">Java</span><span class="skill-tag">SQL</span><span class="skill-tag">JDBC</span></div></div>
+      <div class="skill-card"><div class="skill-card-title"><i class="ti ti-world"></i>Web &amp; Databases</div><div class="skill-tags"><span class="skill-tag">HTML / CSS</span><span class="skill-tag">MySQL</span><span class="skill-tag">MySQL Workbench</span></div></div>
+      <div class="skill-card"><div class="skill-card-title"><i class="ti ti-terminal"></i>Systems &amp; Tools</div><div class="skill-tags"><span class="skill-tag">Linux (Ubuntu)</span><span class="skill-tag">Git / GitHub</span><span class="skill-tag">VS Code</span></div></div>
+      <div class="skill-card"><div class="skill-card-title"><i class="ti ti-shield"></i>Security &amp; Cloud</div><div class="skill-tags"><span class="skill-tag">Cloud Fundamentals</span><span class="skill-tag">Encryption Basics</span><span class="skill-tag">Security Fundamentals</span></div></div>
     </div>
-    <div style="margin-top:40px">
+    <div style="margin-top:44px">
       <div class="sec-label" style="margin-bottom:20px">Certifications</div>
       <div class="cert-grid">
         <div class="cert-card"><div class="cert-icon"><i class="ti ti-shield-check"></i></div><div><div class="cert-name">Google Cybersecurity Certificate</div><div class="cert-issuer">Google</div></div></div>
@@ -241,102 +296,63 @@ footer{background:#060606;padding:24px 48px;border-top:0.5px solid #111;display:
   </div>
 
   <!-- PROJECTS -->
-  <div data-section="projects" style="padding-top:40px">
+  <div id="section-projects" class="section-block reveal">
     <div class="sec-label">What I've built</div>
     <div class="sec-title">Projects</div>
     <div class="projects-grid">
-      <div class="proj-card">
-        <div class="proj-number">01 · ACADEMIC</div>
-        <div class="proj-title">ISAC for Localisation</div>
-        <div class="proj-desc">Simulated a monostatic pulsed-radar ISAC system in MATLAB. Estimated target range via Time-of-Flight (d = c·Δt/2). Analysed detection performance across attenuation, noise, and distance scenarios (5 m–40 m). Produced a 16-page formal report.</div>
-        <div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">Radar</span><span class="proj-tag">6G</span><span class="proj-tag">Signal Processing</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-number">02 · WEB</div>
-        <div class="proj-title">Chaya3ni M3ak — Carpooling Platform</div>
-        <div class="proj-desc">Full-stack carpooling web app connecting drivers and passengers. Built user registration, ride posting, and matching features. PHP backend with MySQL; HTML/CSS/JS frontend.</div>
-        <div class="proj-tags"><span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span><span class="proj-tag">JavaScript</span><span class="proj-tag">HTML/CSS</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-number">03 · NETWORKING</div>
-        <div class="proj-title">LAN Design & IP Routing</div>
-        <div class="proj-desc">Designed a complete LAN topology with IP addressing, configured static and dynamic routing protocols (RIP/OSPF), and verified end-to-end connectivity.</div>
-        <div class="proj-tags"><span class="proj-tag">Cisco Packet Tracer</span><span class="proj-tag">IP Routing</span><span class="proj-tag">LAN</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-number">04 · SIGNAL</div>
-        <div class="proj-title">SNR & Noise Channel Modelling</div>
-        <div class="proj-desc">Generated and analysed signals in MATLAB. Modelled noisy communication channels and studied SNR degradation across different noise levels and channel conditions.</div>
-        <div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">SNR</span><span class="proj-tag">Channel Modelling</span></div>
-      </div>
-      <div class="proj-card">
-        <div class="proj-number">05 · IMAGE</div>
-        <div class="proj-title">Digital Image Processing</div>
-        <div class="proj-desc">Applied low-pass, high-pass, and median filters to digital images. Performed contrast enhancement and frequency-domain analysis using Fourier transforms.</div>
-        <div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">Filters</span><span class="proj-tag">Image Processing</span></div>
-      </div>
+      <div class="proj-card"><div class="proj-number">01 · ACADEMIC</div><div class="proj-title">ISAC for Localisation</div><div class="proj-desc">Simulated a monostatic pulsed-radar ISAC system in MATLAB. Estimated target range via Time-of-Flight (d = c·Δt/2). Analysed detection performance across attenuation, noise, and distance scenarios (5 m–40 m). Produced a 16-page formal report.</div><div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">Radar</span><span class="proj-tag">6G</span><span class="proj-tag">Signal Processing</span></div></div>
+      <div class="proj-card"><div class="proj-number">02 · WEB</div><div class="proj-title">Chaya3ni M3ak — Carpooling Platform</div><div class="proj-desc">Full-stack carpooling web app connecting drivers and passengers. Built user registration, ride posting, and matching features. PHP backend with MySQL; HTML/CSS/JS frontend.</div><div class="proj-tags"><span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span><span class="proj-tag">JavaScript</span><span class="proj-tag">HTML/CSS</span></div></div>
+      <div class="proj-card"><div class="proj-number">03 · NETWORKING</div><div class="proj-title">LAN Design &amp; IP Routing</div><div class="proj-desc">Designed a complete LAN topology with IP addressing, configured static and dynamic routing protocols (RIP/OSPF), and verified end-to-end connectivity.</div><div class="proj-tags"><span class="proj-tag">Cisco Packet Tracer</span><span class="proj-tag">IP Routing</span><span class="proj-tag">LAN</span></div></div>
+      <div class="proj-card"><div class="proj-number">04 · SIGNAL</div><div class="proj-title">SNR &amp; Noise Channel Modelling</div><div class="proj-desc">Generated and analysed signals in MATLAB. Modelled noisy communication channels and studied SNR degradation across different noise levels and channel conditions.</div><div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">SNR</span><span class="proj-tag">Channel Modelling</span></div></div>
+      <div class="proj-card"><div class="proj-number">05 · IMAGE</div><div class="proj-title">Digital Image Processing</div><div class="proj-desc">Applied low-pass, high-pass, and median filters to digital images. Performed contrast enhancement and frequency-domain analysis using Fourier transforms.</div><div class="proj-tags"><span class="proj-tag">MATLAB</span><span class="proj-tag">Filters</span><span class="proj-tag">Image Processing</span></div></div>
     </div>
   </div>
 
   <!-- EDUCATION -->
-  <div data-section="education" style="padding-top:40px">
+  <div id="section-education" class="section-block reveal">
     <div class="sec-label">Academic background</div>
-    <div class="sec-title">Education & activities</div>
+    <div class="sec-title">Education &amp; activities</div>
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-date">2025 – Present</div>
         <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
-        <div class="tl-content">
-          <div class="tl-title">Engineering Degree — Communications & Networks (GCR)</div>
-          <div class="tl-sub">École Nationale d'Ingénieurs de Gabès (ENIG) · First Year</div>
-          <div class="tl-desc">Diplôme National d'Ingénieur — equivalent to a Master's degree. Core subjects: signal processing, telecommunications, network engineering, embedded systems, applied mathematics.</div>
-        </div>
+        <div><div class="tl-title">Engineering Degree — Communications &amp; Networks (GCR)</div><div class="tl-sub">École Nationale d'Ingénieurs de Gabès (ENIG) · First Year</div><div class="tl-desc">Diplôme National d'Ingénieur — equivalent to a Master's degree. Core subjects: signal processing, telecommunications, network engineering, embedded systems, applied mathematics.</div></div>
       </div>
       <div class="tl-item">
         <div class="tl-date">2025 – Present</div>
         <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
-        <div class="tl-content">
-          <div class="tl-title">IEEE Member</div>
-          <div class="tl-sub">Institute of Electrical and Electronics Engineers</div>
-          <div class="tl-desc">Participated in presidential sessions on AI fundamentals and cybersecurity at IEEE chapters.</div>
-        </div>
+        <div><div class="tl-title">IEEE Member</div><div class="tl-sub">Institute of Electrical and Electronics Engineers</div><div class="tl-desc">Participated in presidential sessions on AI fundamentals and cybersecurity at IEEE chapters.</div></div>
       </div>
       <div class="tl-item">
         <div class="tl-date">2025 – Present</div>
         <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
-        <div class="tl-content">
-          <div class="tl-title">Universe Club — Member</div>
-          <div class="tl-sub">ENIG · Communications, Networks & IT</div>
-          <div class="tl-desc">Attended technical workshops and talks on telecom and IT innovations.</div>
-        </div>
+        <div><div class="tl-title">Universe Club — Member</div><div class="tl-sub">ENIG · Communications, Networks &amp; IT</div><div class="tl-desc">Attended technical workshops and talks on telecom and IT innovations.</div></div>
       </div>
       <div class="tl-item">
         <div class="tl-date">2025 – Present</div>
         <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
-        <div class="tl-content">
-          <div class="tl-title">SecuriNets Club — Member</div>
-          <div class="tl-sub">ENIG · Cybersecurity</div>
-          <div class="tl-desc">Engaged with encryption, cryptography, and CTF (Capture The Flag) challenge sessions.</div>
-        </div>
+        <div><div class="tl-title">SecuriNets Club — Member</div><div class="tl-sub">ENIG · Cybersecurity</div><div class="tl-desc">Engaged with encryption, cryptography, and cybersecurity fundamentals.</div></div>
       </div>
     </div>
   </div>
 
   <!-- CONTACT -->
-  <div data-section="contact" style="padding-top:40px">
+  <div id="section-contact" class="section-block reveal">
     <div class="sec-label">Let's connect</div>
-    <div class="sec-title">Contact</div>
+    <div class="sec-title">Get in Touch</div>
     <div class="contact-row">
       <div class="contact-info">
         <div class="contact-item"><i class="ti ti-mail"></i><div><div class="contact-label">Academic email</div><div class="contact-val">zayoud.ayoub@enig.u-gabes.tn</div></div></div>
         <div class="contact-item"><i class="ti ti-mail"></i><div><div class="contact-label">Personal email</div><div class="contact-val">zayoud.ayoub.5541@gmail.com</div></div></div>
         <div class="contact-item"><i class="ti ti-phone"></i><div><div class="contact-label">Phone</div><div class="contact-val">+216 92 908 800</div></div></div>
         <div class="contact-item"><i class="ti ti-map-pin"></i><div><div class="contact-label">Location</div><div class="contact-val">El Kef, Tunisia</div></div></div>
-        <div class="contact-item"><i class="ti ti-brand-linkedin"></i><div><div class="contact-label">LinkedIn</div><div class="contact-val">linkedin.com/in/zayoud-ayoub-334a573a0</div></div></div>
+        <a href="https://www.linkedin.com/in/zayoud-ayoub-334a573a0/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+          <div class="contact-item" style="cursor:pointer"><i class="ti ti-brand-linkedin"></i><div><div class="contact-label">LinkedIn</div><div class="contact-val">linkedin.com/in/zayoud-ayoub-334a573a0</div></div></div>
+        </a>
       </div>
       <div>
-        <div style="background:#141414;border:0.5px solid #222;border-radius:10px;padding:20px">
-          <div style="font-size:12px;color:#555;margin-bottom:12px">Looking for</div>
+        <div style="background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:24px">
+          <div style="font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px">Looking for</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px">
             <span class="skill-tag">Internships</span>
             <span class="skill-tag">AWS re/Start Program</span>
@@ -348,28 +364,55 @@ footer{background:#060606;padding:24px 48px;border-top:0.5px solid #111;display:
       </div>
     </div>
   </div>
+
 </div>
 
 <footer>
   <div class="footer-text">© 2026 Ayoub Zayoud · El Kef, Tunisia</div>
   <div class="footer-links">
-    <a href="https://www.linkedin.com/in/zayoud-ayoub-334a573a0/">LinkedIn</a>
-    <a onclick="show('contact')">Contact</a>
+    <a href="https://www.linkedin.com/in/zayoud-ayoub-334a572a0/" target="_blank" rel="noopener">LinkedIn</a>
+    <a onclick="navClick('section-contact')">Contact</a>
   </div>
 </footer>
 
 <script>
-function show(id){
-  document.querySelectorAll('[data-section]').forEach(el=>el.classList.remove('active'));
-  var t=document.querySelector('[data-section="'+id+'"]');
-  if(t)t.classList.add('active');
-  document.querySelectorAll('.snav-btn').forEach(function(b){
-    var btnText = b.textContent.toLowerCase().trim();
-    var matches = (btnText === id) || (id === 'about' && btnText === 'about') || (id === 'skills' && btnText === 'skills') || (id === 'projects' && btnText === 'projects') || (id === 'education' && btnText === 'education') || (id === 'contact' && btnText === 'contact');
-    if(matches) b.classList.add('active');
-    else b.classList.remove('active');
+const sectionIds = ['section-about','section-skills','section-projects','section-education','section-contact'];
+const navBtns = document.querySelectorAll('.nav-btn');
+
+// smooth scroll to section
+function navClick(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// scroll spy — highlight correct nav button
+function updateNav(){
+  const y = window.scrollY + 140;
+  let active = sectionIds[0];
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if(el && el.offsetTop <= y) active = id;
+  });
+  navBtns.forEach((btn, i) => {
+    btn.classList.toggle('active', sectionIds[i] === active);
   });
 }
+window.addEventListener('scroll', updateNav, {passive:true});
+updateNav();
+
+// scroll reveal + language bars
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.lang-fill[data-width]').forEach(bar => {
+        setTimeout(() => { bar.style.width = bar.dataset.width; }, 300);
+      });
+      observer.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.12});
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
