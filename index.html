@@ -407,7 +407,11 @@ const observer = new IntersectionObserver(entries => {
       e.target.querySelectorAll('.lang-fill[data-width]').forEach(bar => {
         setTimeout(() => { bar.style.width = bar.dataset.width; }, 300);
       });
-      observer.unobserve(e.target);
+    } else {
+      e.target.classList.remove('visible');
+      e.target.querySelectorAll('.lang-fill[data-width]').forEach(bar => {
+        bar.style.width = '0';
+      });
     }
   });
 }, {threshold: 0.12});
